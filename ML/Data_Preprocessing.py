@@ -66,12 +66,16 @@ knn.fit(X_train, y_train)
 print("k-NN trained, training accuracy:", round(knn.score(X_train, y_train), 3))
  
 # Step 2: Train SVM
+print("Training SVM...")
 svm = SVC()
 svm.fit(X_train, y_train)
+print("SVM trained, training accuracy:", round(svm.score(X_train, y_train), 3))
  
 # Step 3: Train LDA
+print("Training LDA...")
 lda = LinearDiscriminantAnalysis()
 lda.fit(X_train, y_train)
- 
+print("LDA trained, training accuracy:", round(lda.score(X_train, y_train), 3))
+
 print("All three models trained")
 
