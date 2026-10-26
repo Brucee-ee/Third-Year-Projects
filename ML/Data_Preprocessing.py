@@ -99,3 +99,20 @@ for k in range(1, 21):
         best_k = k
 
 print("Best k:", best_k, "with Average Accuracy:", round(best_k_score, 3))
+
+# Step 2: Tune SVM
+print("Tuning SVM...")
+best_kernal = ""
+best_Kernal_score = 0
+
+for kernal in ["linear", "poly", "rbf", "sigmoid"]:
+    svm = SVC(kernel=kernal)
+    scores = cross_val_score(svm, X_train, y_train, cv=5)
+    score = scores.mean()
+    print("Kernal =", kernal, "Average Accuracy:", round(scores.mean(), 3))
+
+    if score.mean() > best_Kernal_score:
+        best_Kernal_score = score.mean()
+        best_kernal = kernal
+
+print("Best kernal:", best_kernal, "with Average Accuracy:", round(best_Kernal_score, 3))
