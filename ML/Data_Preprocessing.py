@@ -60,8 +60,10 @@ from sklearn.svm import SVC
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 # Step 1: Train k-NN (k = 5)
+print("Training k-NN...")
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train, y_train)
+print("k-NN trained, training accuracy:", round(knn.score(X_train, y_train), 3))
  
 # Step 2: Train SVM
 svm = SVC()
