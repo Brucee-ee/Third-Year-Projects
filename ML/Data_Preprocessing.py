@@ -53,7 +53,7 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_
 print("Training rows:", len(X_train))
 print("Testing rows:", len(X_test))
 
-#**TASK 3: TRAIN THE MODELS**
+#**TASK 3.1: TRAIN THE MODELS**
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
@@ -79,3 +79,23 @@ print("LDA trained, training accuracy:", round(lda.score(X_train, y_train), 3))
 
 print("All three models trained")
 
+#**Task 3.2: TUNE THE HYPERPARAMETERS**
+
+from sklearn.model_selection import cross_val_score
+
+# Step 1: Tune k-NN
+print("Tuning k-NN...")
+best_k = 0
+best_score = 0
+
+for k in range(1, 21):
+    knn = KNeighborsClassifier(n_neighbors=k)
+    scores = cross_val_score(knn, X_train, y_train, cv=5)
+    score = scores.mean()
+    print("k =", k, "Average Accuracy:", round(scores.mean(), 3))
+
+    if score.mean() > best_k_score:
+        best_k_score = score.mean()
+        best_k = k
+
+print("Best k:", best_k, "with Average Accuracy:", round(best_k_score, 3))
