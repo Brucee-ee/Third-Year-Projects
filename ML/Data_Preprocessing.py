@@ -60,19 +60,19 @@ from sklearn.svm import SVC
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 # Step 1: Train k-NN (k = 5)
-print("Training k-NN...")
+print("Training k-NN")
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train, y_train)
 print("k-NN trained, training accuracy:", round(knn.score(X_train, y_train), 3))
  
 # Step 2: Train SVM
-print("Training SVM...")
+print("Training SVM")
 svm = SVC()
 svm.fit(X_train, y_train)
 print("SVM trained, training accuracy:", round(svm.score(X_train, y_train), 3))
  
 # Step 3: Train LDA
-print("Training LDA...")
+print("Training LDA")
 lda = LinearDiscriminantAnalysis()
 lda.fit(X_train, y_train)
 print("LDA trained, training accuracy:", round(lda.score(X_train, y_train), 3))
@@ -84,7 +84,7 @@ print("All three models trained")
 from sklearn.model_selection import cross_val_score
 
 # Step 1: Tune k-NN
-print("Tuning k-NN...")
+print("Tuning k-NN")
 best_k = 0
 best_score = 0
 
@@ -101,7 +101,7 @@ for k in range(1, 21):
 print("Best k:", best_k, "with Average Accuracy:", round(best_k_score, 3))
 
 # Step 2: Tune SVM
-print("Tuning SVM...")
+print("Tuning SVM")
 best_kernal = ""
 best_Kernal_score = 0
 
@@ -116,3 +116,8 @@ for kernal in ["linear", "poly", "rbf", "sigmoid"]:
         best_kernal = kernal
 
 print("Best kernal:", best_kernal, "with Average Accuracy:", round(best_Kernal_score, 3))
+
+# Step 3: LDA has no hyperparameters to tune
+print("\nLDA: no hyperparameters to tune")
+
+# Step 4: Retrain k-NN and SVM on the full training set using the best settings
