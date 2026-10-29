@@ -86,7 +86,7 @@ from sklearn.model_selection import cross_val_score
 # Step 1: Tune k-NN
 print("Tuning k-NN")
 best_k = 0
-best_score = 0
+best_k_score = 0
 
 for k in range(1, 21):
     knn = KNeighborsClassifier(n_neighbors=k)
@@ -103,7 +103,7 @@ print("Best k:", best_k, "with Average Accuracy:", round(best_k_score, 3))
 # Step 2: Tune SVM
 print("Tuning SVM")
 best_kernal = ""
-best_Kernal_score = 0
+best_kernal_score = 0
 
 for kernal in ["linear", "poly", "rbf", "sigmoid"]:
     svm = SVC(kernel=kernal)
@@ -111,11 +111,11 @@ for kernal in ["linear", "poly", "rbf", "sigmoid"]:
     score = scores.mean()
     print("Kernal =", kernal, "Average Accuracy:", round(scores.mean(), 3))
 
-    if score.mean() > best_Kernal_score:
-        best_Kernal_score = score.mean()
+    if score.mean() > best_kernal_score:
+        best_kernal_score = score.mean()
         best_kernal = kernal
 
-print("Best kernal:", best_kernal, "with Average Accuracy:", round(best_Kernal_score, 3))
+print("Best kernal:", best_kernal, "with Average Accuracy:", round(best_kernal_score, 3))
 
 # Step 3: LDA has no hyperparameters to tune
 print("\nLDA: no hyperparameters to tune")
@@ -124,10 +124,10 @@ print("\nLDA: no hyperparameters to tune")
 knn = KNeighborsClassifier(n_neighbors=best_k)
 knn.fit(X_train, y_train)
  
-svm = SVC(kernel=best_kernel)
+svm = SVC(kernel=best_kernal)
 svm.fit(X_train, y_train)
  
-print("\nFinal models trained with k =", best_k, "and kernel =", best_kernel)
+print("\nFinal models trained with k =", best_k, "and kernel =", best_kernal)
 
 #**TASK 4: EVALUATE THE MODELS ON THE TEST SET**
 
