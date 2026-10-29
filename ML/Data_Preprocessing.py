@@ -121,3 +121,61 @@ print("Best kernal:", best_kernal, "with Average Accuracy:", round(best_Kernal_s
 print("\nLDA: no hyperparameters to tune")
 
 # Step 4: Retrain k-NN and SVM on the full training set using the best settings
+knn = KNeighborsClassifier(n_neighbors=best_k)
+knn.fit(X_train, y_train)
+ 
+svm = SVC(kernel=best_kernel)
+svm.fit(X_train, y_train)
+ 
+print("\nFinal models trained with k =", best_k, "and kernel =", best_kernel)
+
+#**TASK 4: EVALUATE THE MODELS ON THE TEST SET**
+
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+# Step 1: Evaluate k-NN
+y_pred = knn.predict(X_test)
+print("\nk-NN results:")
+print("Accuracy:", round(accuracy_score(y_test, y_pred), 3))
+print("Precision:", round(precision_score(y_test, y_pred), 3))
+print("Recall:", round(recall_score(y_test, y_pred), 3))
+print("F1-Score:", round(f1_score(y_test, y_pred), 3))
+ 
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion matrix:")
+print(cm)
+ConfusionMatrixDisplay(cm, display_labels=["Bad", "Good"]).plot()
+plt.title("k-NN Confusion Matrix")
+ 
+# Step 2: Evaluate SVM
+y_pred = svm.predict(X_test)
+print("\nSVM results:")
+print("Accuracy:", round(accuracy_score(y_test, y_pred), 3))
+print("Precision:", round(precision_score(y_test, y_pred), 3))
+print("Recall:", round(recall_score(y_test, y_pred), 3))
+print("F1-Score:", round(f1_score(y_test, y_pred), 3))
+ 
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion matrix:")
+print(cm)
+ConfusionMatrixDisplay(cm, display_labels=["Bad", "Good"]).plot()
+plt.title("SVM Confusion Matrix")
+ 
+# Step 3: Evaluate LDA
+y_pred = lda.predict(X_test)
+print("\nLDA results:")
+print("Accuracy:", round(accuracy_score(y_test, y_pred), 3))
+print("Precision:", round(precision_score(y_test, y_pred), 3))
+print("Recall:", round(recall_score(y_test, y_pred), 3))
+print("F1-Score:", round(f1_score(y_test, y_pred), 3))
+ 
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion matrix:")
+print(cm)
+ConfusionMatrixDisplay(cm, display_labels=["Bad", "Good"]).plot()
+plt.title("LDA Confusion Matrix")
+ 
+# Step 4: Show all three confusion matrix plots
+plt.show()
