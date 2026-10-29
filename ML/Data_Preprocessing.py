@@ -2,7 +2,7 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
-#**TASK 1: Data Preprocessing**
+# TASK 1: Data Preprocessing
 
 # Clean it up in command prompt
 pd.set_option("display.max_columns", None)
@@ -41,7 +41,7 @@ for q in data["quality"]:
 y = pd.Series(y)
 print(y.value_counts())
 
-#**TASK 2: TRAIN TEST SPLIT**
+# TASK 2: TRAIN TEST SPLIT
 
 # Step 1: Split the dataset into training 70% and testing sets 30%
 from sklearn.model_selection import train_test_split
@@ -53,7 +53,7 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_
 print("Training rows:", len(X_train))
 print("Testing rows:", len(X_test))
 
-#**TASK 3.1: TRAIN THE MODELS**
+# TASK 3.1: TRAIN THE MODELS
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
@@ -79,7 +79,7 @@ print("LDA trained, training accuracy:", round(lda.score(X_train, y_train), 3))
 
 print("All three models trained")
 
-#**Task 3.2: TUNE THE HYPERPARAMETERS**
+# TASK 3.2: TUNE THE HYPERPARAMETERS
 
 from sklearn.model_selection import cross_val_score
 
@@ -129,7 +129,7 @@ svm.fit(X_train, y_train)
  
 print("\nFinal models trained with k =", best_k, "and kernel =", best_kernal)
 
-#**TASK 4: EVALUATE THE MODELS ON THE TEST SET**
+# TASK 4: EVALUATE THE MODELS ON THE TEST SET
 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
